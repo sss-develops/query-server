@@ -37,4 +37,12 @@ public class NewsQueryRepository {
                 .fetch());
     }
 
+    public Optional<List<News>> findNewsByBookmarkWithMemberId(Long memberId) {
+        return Optional.ofNullable(queryFactory.selectFrom(news)
+                .where(news.newsId.in(JPAExpressions.select(bookmark.newsId)
+                                .from(bookmark)
+                                .where(bookmark.memberId.eq(memberId)))
+                        .and(news.deleted.eq(Deleted.FALSE)))
+                .fetch());
+    }
 }
