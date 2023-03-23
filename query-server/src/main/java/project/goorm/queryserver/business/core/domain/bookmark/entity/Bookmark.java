@@ -1,4 +1,4 @@
-package project.goorm.queryserver.business.core.bookmark.entity;
+package project.goorm.queryserver.business.core.domain.bookmark.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,6 +33,12 @@ public class Bookmark {
     public Long getBookmarkId() {
         return bookmarkId;
     }
+
+    public Long getNewsId() { return newsId; }
+
+    public Long getMemberId() { return memberId; }
+
+    public Instant getCreatedAt() { return createdAt; }
 
     @Override
     public boolean equals(Object o) {

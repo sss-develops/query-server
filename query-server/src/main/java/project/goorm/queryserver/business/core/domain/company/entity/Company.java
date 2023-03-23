@@ -1,4 +1,4 @@
-package project.goorm.queryserver.business.core.company.entity;
+package project.goorm.queryserver.business.core.domain.company.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,6 +32,12 @@ public class Company {
     public Long getCompanyId() {
         return companyId;
     }
+
+    public String getCompanyName() { return companyName; }
+
+    public int getNewsCount() { return newsCount; }
+
+    public String getMainImageUrl() { return mainImageUrl; }
 
     @Override
     public boolean equals(Object o) {
