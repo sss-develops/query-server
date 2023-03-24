@@ -23,9 +23,9 @@ public class CompanyQueryRepository {
                 .where(company.companyId.eq(companyId)).fetchOne());
     }
 
-    public Company findCompanyByName(String companyName) {
-        return queryFactory.selectFrom(company)
-                .where(company.companyName.eq(companyName)).fetchOne();
+    public Optional<Company> findCompanyByName(String companyName) {
+        return Optional.ofNullable(queryFactory.selectFrom(company)
+                .where(company.companyName.eq(companyName)).fetchOne());
     }
 
     public List<Company> findCompanyAll() {

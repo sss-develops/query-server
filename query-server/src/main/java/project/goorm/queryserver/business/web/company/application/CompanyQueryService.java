@@ -31,7 +31,8 @@ public class CompanyQueryService {
     // client 에서 사용자가 회사 이름으로 회사를 검색 하는 상황을 가정
     @Transactional(readOnly = true)
     public CompanyResponse findCompanyByName(String companyName) {
-        return new CompanyResponse(companyQueryRepository.findCompanyByName(companyName));
+        return new CompanyResponse(companyQueryRepository.findCompanyByName(companyName)
+                .orElseThrow(() -> SSSTeamException.of(COMPANY_NOT_FOUND_EXCEPTION)));
     }
 
     @Transactional(readOnly = true)
