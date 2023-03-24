@@ -23,13 +23,13 @@ public class CompanyQueryRepository {
                 .where(company.companyId.eq(companyId)).fetchOne());
     }
 
-    public Optional<Company> findCompanyByName(String companyName) {
-        return Optional.ofNullable(queryFactory.selectFrom(company)
-                .where(company.companyName.eq(companyName)).fetchOne());
+    public Company findCompanyByName(String companyName) {
+        return queryFactory.selectFrom(company)
+                .where(company.companyName.eq(companyName)).fetchOne();
     }
 
-    public Optional<List<Company>> findCompanyAll() {
-        return Optional.ofNullable(queryFactory.selectFrom(company)
-                .fetch());
+    public List<Company> findCompanyAll() {
+        return queryFactory.selectFrom(company)
+                .fetch();
     }
 }

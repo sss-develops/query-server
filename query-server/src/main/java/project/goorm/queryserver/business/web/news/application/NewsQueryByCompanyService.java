@@ -23,19 +23,19 @@ public class NewsQueryByCompanyService {
 
     @Transactional(readOnly = true)
     public List<NewsResponse> findNewsByCompanyId(Long companyId) {
-        List<News> findNews = newsQueryRepository.findNewsByCompanyId(companyId)
-                .orElseThrow(() -> SSSTeamException.of(NEWS_IS_EMPTY_EXCEPTION));
+        List<News> findNews = newsQueryRepository.findNewsByCompanyId(companyId);
         List<NewsResponse> newsResponseList = findNews.stream()
-                .map(n -> new NewsResponse(n)).collect(Collectors.toList());
+                .map(n -> new NewsResponse(n))
+                .collect(Collectors.toList());
         return newsResponseList;
     }
 
     @Transactional(readOnly = true)
     public List<NewsResponse> findNewsByCompanyName(String companyName) {
-        List<News> findNews = newsQueryRepository.findNewsByCompanyName(companyName)
-                .orElseThrow(() -> SSSTeamException.of(NEWS_IS_EMPTY_EXCEPTION));
+        List<News> findNews = newsQueryRepository.findNewsByCompanyName(companyName);
         List<NewsResponse> newsResponseList = findNews.stream()
-                .map(n -> new NewsResponse(n)).collect(Collectors.toList());
+                .map(n -> new NewsResponse(n))
+                .collect(Collectors.toList());
         return newsResponseList;
     }
 }

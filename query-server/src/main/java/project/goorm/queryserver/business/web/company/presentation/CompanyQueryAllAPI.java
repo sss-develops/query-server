@@ -22,11 +22,6 @@ public class CompanyQueryAllAPI {
         this.companyQueryService = companyQueryService;
     }
 
-//    @GetMapping
-//    public List<CompanyResponse> findCompanyAll() {
-//        return companyQueryService.findCompanyAll();
-//    }
-
     @GetMapping
     public ResponseEntity<ApiResponse> findCompanyAll() {
         List<CompanyResponse> data = companyQueryService.findCompanyAll();

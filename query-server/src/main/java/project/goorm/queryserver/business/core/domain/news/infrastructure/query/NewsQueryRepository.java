@@ -22,27 +22,27 @@ public class NewsQueryRepository {
         this.queryFactory = queryFactory;
     }
 
-    public Optional<List<News>> findNewsByCompanyId(Long companyId) {
-        return Optional.ofNullable(queryFactory.selectFrom(news)
+    public List<News> findNewsByCompanyId(Long companyId) {
+        return queryFactory.selectFrom(news)
                 .where(news.companyId.eq(companyId)
                 .and(news.deleted.eq(Deleted.FALSE)))
-                .fetch());
+                .fetch();
     }
 
-    public Optional<List<News>> findNewsByCompanyName(String companyName) {
-        return Optional.ofNullable(queryFactory.selectFrom(news)
+    public List<News> findNewsByCompanyName(String companyName) {
+        return queryFactory.selectFrom(news)
                 .join(company)
                 .on(news.companyId.eq(company.companyId))
                 .where(company.companyName.eq(companyName).and(news.deleted.eq(Deleted.FALSE)))
-                .fetch());
+                .fetch();
     }
 
-    public Optional<List<News>> findNewsByBookmarkWithMemberId(Long memberId) {
-        return Optional.ofNullable(queryFactory.selectFrom(news)
+    public List<News> findNewsByBookmarkWithMemberId(Long memberId) {
+        return queryFactory.selectFrom(news)
                 .where(news.newsId.in(JPAExpressions.select(bookmark.newsId)
                                 .from(bookmark)
                                 .where(bookmark.memberId.eq(memberId)))
                         .and(news.deleted.eq(Deleted.FALSE)))
-                .fetch());
+                .fetch();
     }
 }

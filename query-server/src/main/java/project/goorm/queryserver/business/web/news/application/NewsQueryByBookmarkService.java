@@ -23,10 +23,10 @@ public class NewsQueryByBookmarkService {
 
     @Transactional(readOnly = true)
     public List<NewsResponse> findNewsByBookmarkWithMemberId(Long memberId) {
-        List<News> findNews = newsQueryRepository.findNewsByBookmarkWithMemberId(memberId)
-                .orElseThrow(() -> SSSTeamException.of(NEWS_IS_EMPTY_EXCEPTION));
+        List<News> findNews = newsQueryRepository.findNewsByBookmarkWithMemberId(memberId);
         List<NewsResponse> newsResponseList = findNews.stream()
-                .map(n -> new NewsResponse(n)).collect(Collectors.toList());
+                .map(n -> new NewsResponse(n))
+                .collect(Collectors.toList());
         return newsResponseList;
     }
 }

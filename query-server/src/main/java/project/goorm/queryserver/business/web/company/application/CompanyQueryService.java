@@ -28,18 +28,18 @@ public class CompanyQueryService {
                 .orElseThrow(() -> SSSTeamException.of(COMPANY_NOT_FOUND_EXCEPTION)));
     }
 
+    // client 에서 사용자가 회사 이름으로 회사를 검색 하는 상황을 가정
     @Transactional(readOnly = true)
     public CompanyResponse findCompanyByName(String companyName) {
-        return new CompanyResponse(companyQueryRepository.findCompanyByName(companyName)
-                .orElseThrow(() -> SSSTeamException.of(COMPANY_NOT_FOUND_EXCEPTION)));
+        return new CompanyResponse(companyQueryRepository.findCompanyByName(companyName));
     }
 
     @Transactional(readOnly = true)
     public List<CompanyResponse> findCompanyAll() {
-        List<Company> findCompany = companyQueryRepository.findCompanyAll()
-                .orElseThrow(() -> SSSTeamException.of(COMPANY_IS_EMPTY_EXCEPTION));
+        List<Company> findCompany = companyQueryRepository.findCompanyAll();
         List<CompanyResponse> companyResponsesList = findCompany.stream()
-                .map(c -> new CompanyResponse(c)).collect(Collectors.toList());
+                .map(c -> new CompanyResponse(c))
+                .collect(Collectors.toList());
         return companyResponsesList;
     }
 }
