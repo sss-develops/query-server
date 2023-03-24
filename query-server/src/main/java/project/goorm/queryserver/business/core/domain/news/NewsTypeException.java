@@ -1,17 +1,17 @@
-package project.goorm.queryserver.business.core.company;
+package project.goorm.queryserver.business.core.domain.news;
 
 import org.springframework.http.HttpStatus;
 import project.goorm.queryserver.common.exception.common.BaseExceptionType;
 
-public enum CompanyTypeException implements BaseExceptionType {
+public enum NewsTypeException implements BaseExceptionType {
 
-    COMPANY_NOT_FOUND_EXCEPTION(404, "회사를 찾을 수 없습니다.", HttpStatus.NOT_FOUND);
+    NEWS_IS_EMPTY_EXCEPTION(404, "해당 회사의 뉴스 목록이 비었습니다.", HttpStatus.NOT_FOUND);
 
     private final int code;
     private final String message;
     private final HttpStatus status;
 
-    CompanyTypeException(
+    NewsTypeException(
             int code,
             String message,
             HttpStatus status

@@ -1,10 +1,8 @@
-package project.goorm.queryserver.business.core.news.entity;
+package project.goorm.queryserver.business.core.domain.news.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import project.goorm.queryserver.business.core.domain.common.deleted.Deleted;
+
+import javax.persistence.*;
 import java.time.Instant;
 import java.util.Objects;
 
@@ -15,10 +13,10 @@ public class News {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long newsId;
 
-    @Column
+    @Column(name = "news_title")
     private String title;
 
-    @Column
+    @Column(name = "news_description")
     private String description;
 
     @Column
@@ -39,6 +37,10 @@ public class News {
     @Column
     private Instant lastModifiedAt;
 
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "ENUM('TRUE', 'FALSE')")
+    private Deleted deleted;
+
     /**
      * @Nullary-Constructor. JPA 기본 생성자로 news 외부 패키지에서 호출하지 말 것.
      */
@@ -47,6 +49,42 @@ public class News {
 
     public Long getNewsId() {
         return newsId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public String getOriginalLink() {
+        return originalLink;
+    }
+
+    public String getNaverLink() {
+        return naverLink;
+    }
+
+    public Instant getPublishedAt() {
+        return publishedAt;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public Instant getLastModifiedAt() {
+        return lastModifiedAt;
+    }
+
+    public Deleted getDeleted() {
+        return deleted;
     }
 
     @Override
