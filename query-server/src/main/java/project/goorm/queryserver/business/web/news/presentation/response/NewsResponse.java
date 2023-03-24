@@ -46,6 +46,6 @@ public class NewsResponse {
 
     @Override
     public String toString() {
-        return title;
+        return String.format("Title: %s, PubDate: %s, OriginalLink: %s", title, publishedAt, originalLink);
     }
 }

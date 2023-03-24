@@ -34,11 +34,17 @@ public class Bookmark {
         return bookmarkId;
     }
 
-    public Long getNewsId() { return newsId; }
+    public Long getNewsId() {
+        return newsId;
+    }
 
-    public Long getMemberId() { return memberId; }
+    public Long getMemberId() {
+        return memberId;
+    }
 
-    public Instant getCreatedAt() { return createdAt; }
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
 
     @Override
     public boolean equals(Object o) {

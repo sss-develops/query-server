@@ -33,11 +33,17 @@ public class Company {
         return companyId;
     }
 
-    public String getCompanyName() { return companyName; }
+    public String getCompanyName() {
+        return companyName;
+    }
 
-    public int getNewsCount() { return newsCount; }
+    public int getNewsCount() {
+        return newsCount;
+    }
 
-    public String getMainImageUrl() { return mainImageUrl; }
+    public String getMainImageUrl() {
+        return mainImageUrl;
+    }
 
     @Override
     public boolean equals(Object o) {

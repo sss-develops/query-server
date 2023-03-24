@@ -13,10 +13,10 @@ public class News {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long newsId;
 
-    @Column(name = "newsTitle")
+    @Column(name = "news_title")
     private String title;
 
-    @Column(name = "newsDescription")
+    @Column(name = "news_description")
     private String description;
 
     @Column
@@ -51,22 +51,41 @@ public class News {
         return newsId;
     }
 
-    public String getTitle() { return title; }
+    public String getTitle() {
+        return title;
+    }
 
-    public String getDescription() { return description; }
+    public String getDescription() {
+        return description;
+    }
 
-    public Long getCompanyId() { return companyId; }
+    public Long getCompanyId() {
+        return companyId;
+    }
 
-    public String getOriginalLink() { return originalLink; }
+    public String getOriginalLink() {
+        return originalLink;
+    }
 
-    public String getNaverLink() { return naverLink; }
-    public Instant getPublishedAt() { return publishedAt; }
+    public String getNaverLink() {
+        return naverLink;
+    }
 
-    public Instant getCreatedAt() { return createdAt; }
+    public Instant getPublishedAt() {
+        return publishedAt;
+    }
 
-    public Instant getLastModifiedAt() { return lastModifiedAt; }
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
 
-    public Deleted getDeleted() { return deleted; }
+    public Instant getLastModifiedAt() {
+        return lastModifiedAt;
+    }
+
+    public Deleted getDeleted() {
+        return deleted;
+    }
 
     @Override
     public boolean equals(Object o) {
