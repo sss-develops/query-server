@@ -48,10 +48,6 @@ dependencies {
     testAnnotationProcessor('org.projectlombok:lombok:1.18.24')
     annotationProcessor('org.projectlombok:lombok')
     annotationProcessor('org.springframework.boot:spring-boot-configuration-processor')
-
-    // kafka
-    implementation 'org.springframework.kafka:spring-kafka'
-    testImplementation 'org.springframework.kafka:spring-kafka-test'
 }
 
 tasks.named('test') {
