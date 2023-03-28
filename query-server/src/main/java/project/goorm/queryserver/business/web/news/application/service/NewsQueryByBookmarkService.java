@@ -1,4 +1,4 @@
-package project.goorm.queryserver.business.web.news.application;
+package project.goorm.queryserver.business.web.news.application.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +22,7 @@ public class NewsQueryByBookmarkService {
     public List<NewsResponse> findBookMarkByMemberId(Long memberId) {
         List<News> findNews = newsQueryRepository.findBookMarkByMemberId(memberId);
         return findNews.stream()
-                .map(n -> new NewsResponse(n))
+                .map(NewsResponse::of)
                 .collect(Collectors.toList());
     }
 }
