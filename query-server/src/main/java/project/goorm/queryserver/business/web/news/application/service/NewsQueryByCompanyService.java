@@ -1,16 +1,13 @@
-package project.goorm.queryserver.business.web.news.application;
+package project.goorm.queryserver.business.web.news.application.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.goorm.queryserver.business.core.domain.news.entity.News;
 import project.goorm.queryserver.business.core.domain.news.infrastructure.query.NewsQueryRepository;
 import project.goorm.queryserver.business.web.news.presentation.response.NewsResponse;
-import project.goorm.queryserver.common.exception.common.SSSTeamException;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static project.goorm.queryserver.business.core.domain.news.NewsTypeException.NEWS_IS_EMPTY_EXCEPTION;
 
 @Service
 public class NewsQueryByCompanyService {
@@ -24,18 +21,16 @@ public class NewsQueryByCompanyService {
     @Transactional(readOnly = true)
     public List<NewsResponse> findNewsByCompanyId(Long companyId) {
         List<News> findNews = newsQueryRepository.findNewsByCompanyId(companyId);
-        List<NewsResponse> newsResponseList = findNews.stream()
-                .map(n -> new NewsResponse(n))
+        return findNews.stream()
+                .map(NewsResponse::of)
                 .collect(Collectors.toList());
-        return newsResponseList;
     }
 
     @Transactional(readOnly = true)
     public List<NewsResponse> findNewsByCompanyName(String companyName) {
         List<News> findNews = newsQueryRepository.findNewsByCompanyName(companyName);
-        List<NewsResponse> newsResponseList = findNews.stream()
-                .map(n -> new NewsResponse(n))
+        return findNews.stream()
+                .map(NewsResponse::of)
                 .collect(Collectors.toList());
-        return newsResponseList;
     }
 }

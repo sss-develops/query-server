@@ -5,6 +5,8 @@ import project.goorm.queryserver.common.exception.common.BaseExceptionType;
 
 public enum NewsTypeException implements BaseExceptionType {
 
+    INVALID_NEWS_ID_EXCEPTION(400, "올바르지 않은 뉴스 아이디 입니다.", HttpStatus.BAD_REQUEST),
+    NEWS_NOT_FOUND_EXCEPTION(404, "해당 뉴스를 찾을 수 없습니다.", HttpStatus.NOT_FOUND),
     NEWS_IS_EMPTY_EXCEPTION(404, "해당 회사의 뉴스 목록이 비었습니다.", HttpStatus.NOT_FOUND);
 
     private final int code;

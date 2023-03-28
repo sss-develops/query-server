@@ -2,7 +2,13 @@ package project.goorm.queryserver.business.core.domain.news.entity;
 
 import project.goorm.queryserver.business.core.domain.common.deleted.Deleted;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.Instant;
 import java.util.Objects;
 
@@ -13,10 +19,10 @@ public class News {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long newsId;
 
-    @Column(name = "news_title")
+    @Column
     private String title;
 
-    @Column(name = "news_description")
+    @Column
     private String description;
 
     @Column
@@ -45,6 +51,25 @@ public class News {
      * @Nullary-Constructor. JPA 기본 생성자로 news 외부 패키지에서 호출하지 말 것.
      */
     protected News() {
+    }
+
+    public News(
+            String title,
+            String description,
+            Long companyId,
+            String originalLink,
+            String naverLink,
+            Instant publishedAt,
+            Instant createdAt
+    ) {
+        this.title = title;
+        this.description = description;
+        this.companyId = companyId;
+        this.originalLink = originalLink;
+        this.naverLink = naverLink;
+        this.publishedAt = publishedAt;
+        this.createdAt = createdAt;
+        this.deleted = Deleted.FALSE;
     }
 
     public Long getNewsId() {
