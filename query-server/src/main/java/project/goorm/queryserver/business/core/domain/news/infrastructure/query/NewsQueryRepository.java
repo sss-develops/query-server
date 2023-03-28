@@ -22,10 +22,21 @@ public class NewsQueryRepository {
         this.queryFactory = queryFactory;
     }
 
+    public Optional<News> findNewsById(Long newsId) {
+        return Optional.ofNullable(
+                queryFactory.selectFrom(news)
+                        .where(
+                                news.newsId.eq(newsId)
+                                        .and(news.deleted.eq(Deleted.FALSE))
+                        )
+                        .fetchOne()
+        );
+    }
+
     public List<News> findNewsByCompanyId(Long companyId) {
         return queryFactory.selectFrom(news)
                 .where(news.companyId.eq(companyId)
-                .and(news.deleted.eq(Deleted.FALSE)))
+                        .and(news.deleted.eq(Deleted.FALSE)))
                 .fetch();
     }
 
@@ -37,7 +48,7 @@ public class NewsQueryRepository {
                 .fetch();
     }
 
-    public List<News> findNewsByBookmarkWithMemberId(Long memberId) {
+    public List<News> findBookMarkByMemberId(Long memberId) {
         return queryFactory.selectFrom(news)
                 .where(news.newsId.in(JPAExpressions.select(bookmark.newsId)
                                 .from(bookmark)
