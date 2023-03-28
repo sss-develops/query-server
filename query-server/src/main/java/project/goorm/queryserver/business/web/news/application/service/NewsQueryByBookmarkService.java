@@ -5,12 +5,9 @@ import org.springframework.transaction.annotation.Transactional;
 import project.goorm.queryserver.business.core.domain.news.entity.News;
 import project.goorm.queryserver.business.core.domain.news.infrastructure.query.NewsQueryRepository;
 import project.goorm.queryserver.business.web.news.presentation.response.NewsResponse;
-import project.goorm.queryserver.common.exception.common.SSSTeamException;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static project.goorm.queryserver.business.core.domain.news.NewsTypeException.NEWS_IS_EMPTY_EXCEPTION;
 
 @Service
 public class NewsQueryByBookmarkService {
@@ -22,11 +19,10 @@ public class NewsQueryByBookmarkService {
     }
 
     @Transactional(readOnly = true)
-    public List<NewsResponse> findNewsByBookmarkWithMemberId(Long memberId) {
-        List<News> findNews = newsQueryRepository.findNewsByBookmarkWithMemberId(memberId);
-        List<NewsResponse> newsResponseList = findNews.stream()
+    public List<NewsResponse> findBookMarkByMemberId(Long memberId) {
+        List<News> findNews = newsQueryRepository.findBookMarkByMemberId(memberId);
+        return findNews.stream()
                 .map(n -> new NewsResponse(n))
                 .collect(Collectors.toList());
-        return newsResponseList;
     }
 }
