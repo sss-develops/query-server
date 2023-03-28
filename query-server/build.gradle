@@ -37,6 +37,11 @@ dependencies {
     implementation(group: 'mysql', name: 'mysql-connector-java', version: '8.0.28')
     runtimeOnly('mysql:mysql-connector-java')
 
+    // Redis
+    implementation('org.springframework.boot:spring-boot-starter-data-redis')
+    implementation(group: 'it.ozimov', name: 'embedded-redis', version: '0.7.1')
+    implementation('org.redisson:redisson-spring-boot-starter:3.16.8')
+    
     // Test
     testImplementation('org.springframework.boot:spring-boot-starter-test')
     testImplementation('org.springframework.restdocs:spring-restdocs-mockmvc')
