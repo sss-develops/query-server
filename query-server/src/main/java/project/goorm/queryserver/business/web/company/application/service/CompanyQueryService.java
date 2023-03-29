@@ -1,46 +1,69 @@
-package project.goorm.queryserver.business.web.company.application;
+package project.goorm.queryserver.business.web.company.application.service;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.goorm.queryserver.business.core.domain.company.entity.Company;
 import project.goorm.queryserver.business.core.domain.company.infrastructure.query.CompanyQueryRepository;
+import project.goorm.queryserver.business.web.common.paging.Cursor;
+import project.goorm.queryserver.business.web.company.application.CompanySearchQuery;
 import project.goorm.queryserver.business.web.company.presentation.response.CompanyResponse;
 import project.goorm.queryserver.common.exception.common.SSSTeamException;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static project.goorm.queryserver.business.core.domain.company.CompanyTypeException.COMPANY_IS_EMPTY_EXCEPTION;
 import static project.goorm.queryserver.business.core.domain.company.CompanyTypeException.COMPANY_NOT_FOUND_EXCEPTION;
+import static project.goorm.queryserver.common.configuration.redis.RedisKey.COMPANY_CACHE_CONDITION;
+import static project.goorm.queryserver.common.configuration.redis.RedisKey.COMPANY_CACHE_KEY;
+import static project.goorm.queryserver.common.configuration.redis.RedisKey.COMPANY_CACHE_VALUE;
+import static project.goorm.queryserver.common.configuration.redis.RedisKey.TOP_SEARCHED_COMPANIES_CACHE_CONDITION;
+import static project.goorm.queryserver.common.configuration.redis.RedisKey.TOP_SEARCHED_COMPANIES_CACHE_KEY;
+import static project.goorm.queryserver.common.configuration.redis.RedisKey.TOP_SEARCHED_COMPANIES_CACHE_VALUE;
 
 @Service
-public class CompanyQueryService {
+public class CompanyQueryService implements CompanySearchQuery {
 
     private final CompanyQueryRepository companyQueryRepository;
+    private final RedisCacheService redisCacheService;
 
-    public CompanyQueryService(CompanyQueryRepository companyQueryRepository) {
+    public CompanyQueryService(
+            CompanyQueryRepository companyQueryRepository,
+            RedisCacheService redisCacheService
+    ) {
         this.companyQueryRepository = companyQueryRepository;
+        this.redisCacheService = redisCacheService;
     }
 
+    @Override
     @Transactional(readOnly = true)
-    public CompanyResponse findCompanyById(Long companyId) {
-        return new CompanyResponse(companyQueryRepository.findCompanyById(companyId)
-                .orElseThrow(() -> SSSTeamException.of(COMPANY_NOT_FOUND_EXCEPTION)));
+    @Cacheable(
+            key = COMPANY_CACHE_KEY,
+            value = COMPANY_CACHE_VALUE,
+            condition = COMPANY_CACHE_CONDITION
+    )
+    public CompanyResponse searchCompanyId(Long companyId) {
+        Company company = companyQueryRepository.searchCompanyId(companyId)
+                .orElseThrow(() -> SSSTeamException.of(COMPANY_NOT_FOUND_EXCEPTION));
+        return CompanyResponse.of(company);
     }
 
-    // client 에서 사용자가 회사 이름으로 회사를 검색 하는 상황을 가정
+    @Override
     @Transactional(readOnly = true)
-    public CompanyResponse findCompanyByName(String companyName) {
-        return new CompanyResponse(companyQueryRepository.findCompanyByName(companyName)
-                .orElseThrow(() -> SSSTeamException.of(COMPANY_NOT_FOUND_EXCEPTION)));
+    public List<CompanyResponse> searchCompaniesByName(Cursor cursor, String companyName) {
+        return null;
     }
 
+    @Override
     @Transactional(readOnly = true)
-    public List<CompanyResponse> findCompanyAll() {
-        List<Company> findCompany = companyQueryRepository.findCompanyAll();
-        List<CompanyResponse> companyResponsesList = findCompany.stream()
-                .map(c -> new CompanyResponse(c))
-                .collect(Collectors.toList());
-        return companyResponsesList;
+    @Cacheable(
+            key = TOP_SEARCHED_COMPANIES_CACHE_KEY,
+            value = TOP_SEARCHED_COMPANIES_CACHE_VALUE,
+            condition = TOP_SEARCHED_COMPANIES_CACHE_CONDITION
+    )
+    public List<CompanyResponse> getTopSearchedCompanies() {
+
+        return companyQueryRepository.findTopSearchedCompanies().stream()
+                .map(CompanyResponse::of)
+                .toList();
     }
 }
