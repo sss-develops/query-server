@@ -1,26 +1,28 @@
 package project.goorm.queryserver.business.web.company.presentation;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import project.goorm.queryserver.business.core.domain.company.entity.Company;
-import project.goorm.queryserver.business.web.company.application.CompanyQueryService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import project.goorm.queryserver.business.web.company.application.service.CompanyQueryService;
 import project.goorm.queryserver.business.web.company.presentation.response.CompanyResponse;
 import project.goorm.queryserver.common.annotation.helper.PresentationLayer;
 import project.goorm.queryserver.common.response.ApiResponse;
 
+import java.util.List;
+
 @PresentationLayer
-@RequestMapping("/api/company/name")
-public class CompanyQueryByNameAPI {
+@RequestMapping("/api/company/all")
+public class CompanyQueryAllAPI {
 
     private final CompanyQueryService companyQueryService;
 
-    public CompanyQueryByNameAPI(CompanyQueryService companyQueryService) {
+    public CompanyQueryAllAPI(CompanyQueryService companyQueryService) {
         this.companyQueryService = companyQueryService;
     }
 
-    @GetMapping("/{name}")
-    public ResponseEntity<ApiResponse> findCompanyByName(@PathVariable("name") String companyName) {
-        CompanyResponse data = companyQueryService.findCompanyByName(companyName);
+    @GetMapping
+    public ResponseEntity<ApiResponse> findCompanyAll() {
+        List<CompanyResponse> data = companyQueryService.findCompanyAll();
         return ResponseEntity.ok()
                 .body(ApiResponse.of(data));
     }
