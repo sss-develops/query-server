@@ -47,6 +47,7 @@ dependencies {
     testImplementation('org.springframework.restdocs:spring-restdocs-mockmvc')
     testImplementation('org.springframework.restdocs:spring-restdocs-restassured')
     testImplementation "org.testcontainers:testcontainers:1.17.6"
+    testImplementation "org.testcontainers:junit-jupiter:1.17.6"
 
     // Lombok
     compileOnly('org.projectlombok:lombok:1.18.22')
