@@ -21,6 +21,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 
+@DisplayName("커서 단위 테스트")
 public class CursorUnitTest extends IntegrationTestBase {
 
     @Autowired
