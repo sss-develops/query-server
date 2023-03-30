@@ -11,7 +11,7 @@ public interface CompanySearchQuery {
 
     CompanyResponse searchCompanyId(Long companyId);
 
-    List<CompanyResponse> searchCompaniesByName(Cursor cursor, String companyName);
+    List<CompanyResponse> searchCompaniesName(Cursor cursor, String companyName);
 
     List<CompanyResponse> getTopSearchedCompanies();
 
