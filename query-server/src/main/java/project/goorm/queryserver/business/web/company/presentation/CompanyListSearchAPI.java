@@ -14,7 +14,7 @@ import project.goorm.queryserver.common.response.ApiResponse;
 import java.util.List;
 
 @PresentationLayer
-@RequestMapping(path = "/api/company/all")
+@RequestMapping(path = "/api/query/companies/list")
 public class CompanyListSearchAPI {
 
     private final CompanySearchQuery companySearchQuery;
@@ -24,11 +24,11 @@ public class CompanyListSearchAPI {
     }
 
     @GetMapping
-    public ResponseEntity<ApiResponse> searchCompaniesByName(
+    public ResponseEntity<ApiResponse> searchCompaniesName(
             @CursorPageable Cursor cursor,
             @RequestParam("companyName") String companyName
     ) {
-        List<CompanyResponse> data = companySearchQuery.searchCompaniesByName(
+        List<CompanyResponse> data = companySearchQuery.searchCompaniesName(
                 cursor,
                 companyName
         );
