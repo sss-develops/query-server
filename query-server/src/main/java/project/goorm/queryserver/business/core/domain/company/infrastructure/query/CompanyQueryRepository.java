@@ -1,6 +1,5 @@
 package project.goorm.queryserver.business.core.domain.company.infrastructure.query;
 
-import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Repository;
 import project.goorm.queryserver.business.core.domain.common.deleted.Deleted;
@@ -40,7 +39,7 @@ public class CompanyQueryRepository {
                 .where(company.companyName.eq(companyName)).fetchOne());
     }
 
-    public List<Company> searchCompaniesName(
+    public List<Company> searchCompaniesByName(
             Cursor cursor,
             String companyName
     ) {

@@ -24,11 +24,11 @@ public class CompanyListSearchAPI {
     }
 
     @GetMapping
-    public ResponseEntity<ApiResponse> searchCompaniesName(
+    public ResponseEntity<ApiResponse> searchCompaniesByName(
             @CursorPageable Cursor cursor,
             @RequestParam("companyName") String companyName
     ) {
-        List<CompanyResponse> data = companySearchQuery.searchCompaniesName(
+        List<CompanyResponse> data = companySearchQuery.searchCompaniesByName(
                 cursor,
                 companyName
         );
