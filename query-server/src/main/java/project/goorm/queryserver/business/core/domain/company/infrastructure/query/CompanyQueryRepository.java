@@ -45,7 +45,7 @@ public class CompanyQueryRepository {
     ) {
         return queryFactory.selectFrom(company)
                 .where(
-                        company.companyName.like(companyName + "%")
+                        company.companyName.lower().like(companyName.toLowerCase() + "%")
                                 .and(company.deleted.eq(Deleted.FALSE))
                                 .and(company.companyId.gt(cursor.getNext()))
                 )
