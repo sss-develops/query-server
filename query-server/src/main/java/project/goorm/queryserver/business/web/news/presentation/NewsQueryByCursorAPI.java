@@ -22,7 +22,7 @@ public class NewsQueryByCursorAPI {
 
     @GetMapping("/cursor")
     public ResponseEntity<ApiResponse> findByCursor(@CursorPageable Cursor cursor) {
-        CursorResult<News> newsCursorResult = newsCursorSearchService.findByCursorPaging(Cursor.from(cursor.getNext(), cursor.getPageSize()));
+        CursorResult<News> newsCursorResult = newsCursorSearchService.findByCursorPaging(cursor);
         return ResponseEntity.ok(ApiResponse.of(newsCursorResult));
     }
 }
