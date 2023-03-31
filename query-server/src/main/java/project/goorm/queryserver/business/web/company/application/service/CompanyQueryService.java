@@ -49,8 +49,16 @@ public class CompanyQueryService implements CompanySearchQuery {
 
     @Override
     @Transactional(readOnly = true)
-    public List<CompanyResponse> searchCompaniesByName(Cursor cursor, String companyName) {
-        return null;
+    public List<CompanyResponse> searchCompaniesByName(
+            Cursor cursor,
+            String companyName
+    ) {
+        return companyQueryRepository.searchCompaniesByName(
+                    cursor,
+                    companyName
+                ).stream()
+                .map(CompanyResponse::of)
+                .toList();
     }
 
     @Override

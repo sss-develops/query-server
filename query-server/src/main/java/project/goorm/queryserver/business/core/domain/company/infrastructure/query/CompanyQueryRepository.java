@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import project.goorm.queryserver.business.core.domain.common.deleted.Deleted;
 import project.goorm.queryserver.business.core.domain.company.entity.Company;
 import project.goorm.queryserver.business.core.domain.company.entity.TopSearchedCompany;
+import project.goorm.queryserver.business.web.common.paging.Cursor;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,6 +37,21 @@ public class CompanyQueryRepository {
     public Optional<Company> findCompanyByName(String companyName) {
         return Optional.ofNullable(queryFactory.selectFrom(company)
                 .where(company.companyName.eq(companyName)).fetchOne());
+    }
+
+    public List<Company> searchCompaniesByName(
+            Cursor cursor,
+            String companyName
+    ) {
+        return queryFactory.selectFrom(company)
+                .where(
+                        company.companyName.lower().like(companyName.toLowerCase() + "%")
+                                .and(company.deleted.eq(Deleted.FALSE))
+                                .and(company.companyId.gt(cursor.getNext()))
+                )
+                .orderBy(company.companyId.asc())
+                .limit(cursor.getPageSize())
+                .fetch();
     }
 
     public List<Company> findCompanyAll() {

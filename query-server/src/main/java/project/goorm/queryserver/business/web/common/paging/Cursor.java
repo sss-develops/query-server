@@ -34,6 +34,8 @@ public class Cursor {
     }
 
     private void validateCursor(Long next) {
+        if (next == null)
+            return;
         if (next < 0) {
             throw new IllegalArgumentException();
         }

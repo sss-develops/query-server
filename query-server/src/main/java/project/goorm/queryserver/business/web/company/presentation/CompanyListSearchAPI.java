@@ -14,7 +14,7 @@ import project.goorm.queryserver.common.response.ApiResponse;
 import java.util.List;
 
 @PresentationLayer
-@RequestMapping(path = "/api/company/all")
+@RequestMapping(path = "/api/query/companies/list")
 public class CompanyListSearchAPI {
 
     private final CompanySearchQuery companySearchQuery;

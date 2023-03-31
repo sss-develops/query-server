@@ -34,6 +34,18 @@ public class Company {
     protected Company() {
     }
 
+    public Company(
+            String companyName,
+            int newsCount,
+            String mainImageUrl,
+            Deleted deleted
+    ) {
+        this.companyName = companyName;
+        this.newsCount = newsCount;
+        this.mainImageUrl = mainImageUrl;
+        this.deleted = deleted;
+    }
+
     public Long getCompanyId() {
         return companyId;
     }
