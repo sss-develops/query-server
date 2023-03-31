@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.goorm.queryserver.business.core.domain.news.entity.News;
 import project.goorm.queryserver.business.web.common.paging.Cursor;
+import project.goorm.queryserver.business.web.common.paging.CursorPageable;
 import project.goorm.queryserver.business.web.common.paging.CursorResult;
 import project.goorm.queryserver.business.web.news.application.service.paging.NewsCursorSearchService;
 import project.goorm.queryserver.common.annotation.helper.PresentationLayer;
@@ -20,8 +21,8 @@ public class NewsQueryByCursorAPI {
     }
 
     @GetMapping("/cursor")
-    public ResponseEntity<ApiResponse> findByCursor(@RequestParam Long next, @RequestParam Integer size) {
-        CursorResult<News> newsCursorResult = newsCursorSearchService.findByCursorPaging(Cursor.from(next, size));
+    public ResponseEntity<ApiResponse> findByCursor(@CursorPageable Cursor cursor) {
+        CursorResult<News> newsCursorResult = newsCursorSearchService.findByCursorPaging(Cursor.from(cursor.getNext(), cursor.getPageSize()));
         return ResponseEntity.ok(ApiResponse.of(newsCursorResult));
     }
 }
