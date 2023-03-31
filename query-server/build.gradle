@@ -36,6 +36,7 @@ dependencies {
     // MySQL
     implementation(group: 'mysql', name: 'mysql-connector-java', version: '8.0.28')
     runtimeOnly('mysql:mysql-connector-java')
+    testImplementation "org.testcontainers:mysql:1.17.6"
 
     // Redis
     implementation('org.springframework.boot:spring-boot-starter-data-redis')

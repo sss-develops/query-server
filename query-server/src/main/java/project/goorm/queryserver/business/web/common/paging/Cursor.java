@@ -19,6 +19,12 @@ public class Cursor {
         this.pageSize = getPageSize(pageSize);
     }
 
+    private Cursor(
+            int pageSize
+    ) {
+        this.pageSize = getPageSize(pageSize);
+    }
+
     private Long getNext(Long next) {
         return next == null ? FIRST_PAGE : next;
     }
@@ -38,6 +44,12 @@ public class Cursor {
             int pageSize
     ) {
         return new Cursor(next, pageSize);
+    }
+
+    public static Cursor from(
+            int pageSize
+    ) {
+        return new Cursor(pageSize);
     }
 
     public Long getNext() {
