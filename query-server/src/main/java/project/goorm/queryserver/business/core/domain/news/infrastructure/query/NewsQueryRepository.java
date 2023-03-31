@@ -56,4 +56,27 @@ public class NewsQueryRepository {
                         .and(news.deleted.eq(Deleted.FALSE)))
                 .fetch();
     }
+
+    public Boolean existByIdLessThan(Long id) {
+        List<Long> fetch = queryFactory.select(news.newsId)
+                .from(news)
+                .where(news.newsId.lt(id))
+                .fetch();
+        return fetch.size() > 0;
+    }
+
+    public List<News> findAllByOrder(Long size) {
+        return queryFactory.selectFrom(news)
+                .orderBy(news.newsId.desc())
+                .limit(size)
+                .fetch();
+    }
+
+    public List<News> findAllByIdLessThanOrderByIdDesc(Long cursorId, Long size) {
+        return queryFactory.selectFrom(news)
+                .where(news.newsId.lt(cursorId))
+                .orderBy(news.newsId.desc())
+                .limit(size)
+                .fetch();
+    }
 }
