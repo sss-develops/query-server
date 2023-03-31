@@ -30,7 +30,13 @@ public class PagingArgumentResolver implements HandlerMethodArgumentResolver {
         String target = webRequest.getParameter(CURSOR_TARGET);
         String pageSize = webRequest.getParameter(PAGE_SIZE);
 
+
         CursorPageable cursorPageable = parameter.getParameterAnnotation(CursorPageable.class);
+        if (target == null) {
+            return Cursor.from(
+                    getPageSize(pageSize, cursorPageable)
+            );
+        }
         return Cursor.from(
                 parseLong(target),
                 getPageSize(pageSize, cursorPageable)
