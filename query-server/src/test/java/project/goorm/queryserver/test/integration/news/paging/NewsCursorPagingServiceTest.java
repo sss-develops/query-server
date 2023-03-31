@@ -16,7 +16,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-@DisplayName("News커서 기반 조회를 테스트")
+@DisplayName("News커서 기반 조회 테스트")
 public class NewsCursorPagingServiceTest extends AbstractContainerTestBase {
 
     @Autowired

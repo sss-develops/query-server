@@ -1,7 +1,7 @@
 package project.goorm.queryserver.common.configuration.rdb;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -31,7 +31,7 @@ public abstract class AbstractContainerTestBase {
     @Autowired
     protected ObjectMapper objectMapper;
 
-    @AfterEach
+    @BeforeEach
     void setUP() {
         redisInitialization.init();
         rdbInitialization.truncateAllEntity();
