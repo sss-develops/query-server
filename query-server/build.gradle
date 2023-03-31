@@ -20,12 +20,21 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    set('springCloudVersion', "2021.0.6")
+}
+
 dependencies {
     // SpringBoot
     implementation('org.springframework.boot:spring-boot-starter')
     implementation('org.springframework.boot:spring-boot-starter-web:2.7.8')
     implementation(group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.7.8')
     implementation(group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: '2.7.8')
+
+    // Spring Cloud
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation 'org.springframework.cloud:spring-cloud-sleuth-zipkin'
+    implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
 
     // JPA, QueryDSL
     implementation('org.springframework.boot:spring-boot-starter-data-jpa')
@@ -63,9 +72,16 @@ dependencies {
     testImplementation "org.testcontainers:kafka:1.17.6"
 }
 
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
 tasks.named('test') {
     useJUnitPlatform()
 }
+
 
 //--------------------------------------------------------------------------
 
