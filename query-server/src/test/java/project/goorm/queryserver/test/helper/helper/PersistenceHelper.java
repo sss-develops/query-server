@@ -5,6 +5,8 @@ import org.springframework.stereotype.Component;
 import project.goorm.queryserver.business.core.domain.news.entity.News;
 import project.goorm.queryserver.business.core.domain.news.infrastructure.command.NewsJpaRepository;
 
+import java.util.List;
+
 @Component
 public class PersistenceHelper {
 
@@ -17,5 +19,9 @@ public class PersistenceHelper {
 
     public News findNewsById(Long newsId) {
         return newsJpaRepository.findById(newsId).orElseThrow();
+    }
+
+    public List<News> persist(List<News> newsList) {
+        return newsJpaRepository.saveAll(newsList);
     }
 }
