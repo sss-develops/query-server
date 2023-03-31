@@ -11,7 +11,7 @@ import project.goorm.queryserver.common.annotation.helper.PresentationLayer;
 import project.goorm.queryserver.common.response.ApiResponse;
 
 @PresentationLayer
-@RequestMapping(path = "/api/query/companies")
+@RequestMapping(path = "/api/companies")
 public class CompanyDetailSearchAPI {
 
     private final CompanySearchQuery companySearchQuery;

@@ -10,7 +10,7 @@ import project.goorm.queryserver.common.annotation.helper.PresentationLayer;
 import project.goorm.queryserver.common.response.ApiResponse;
 
 @PresentationLayer
-@RequestMapping(path = "/api/query/news")
+@RequestMapping(path = "/api/news")
 public class NewsQueryAPI {
 
     private final NewsQuery newsQuery;
