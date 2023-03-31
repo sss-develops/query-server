@@ -10,13 +10,13 @@ import project.goorm.queryserver.business.web.common.paging.CursorResult;
 import java.util.List;
 
 @Service
-public class NewsCursorPagingService {
+public class NewsCursorSearchService {
 
     private static final Long DEFAULT_PAGE_SIZE = 10L;
 
     private NewsQueryRepository newsQueryRepository;
 
-    public NewsCursorPagingService(NewsQueryRepository newsQueryRepository) {
+    public NewsCursorSearchService(NewsQueryRepository newsQueryRepository) {
         this.newsQueryRepository = newsQueryRepository;
     }
 
