@@ -51,10 +51,15 @@ public class NewsCursorPagingServiceTest extends AbstractContainerTestBase {
         persistenceHelper.persist(newsList);
 
         // when - action or the behaviour that we are going test
-        CursorResult<News> byCursorPaging = newsCursorPagingService.findByCursorPaging(Cursor.from(5));
+        CursorResult<News> byCursorPaging =
+                newsCursorPagingService.findByCursorPaging(Cursor.from(5));
+
+        CursorResult<News> byCursorPaging2 =
+                newsCursorPagingService.findByCursorPaging(Cursor.from(byCursorPaging.getLastIndex(), 5));
+
 
         // then - verify the output
-        assertThat(byCursorPaging.getLastIndex()).isEqualTo(5);
+        assertThat(byCursorPaging2.getLastIndex()).isEqualTo(1);
     }
 
     @Test
