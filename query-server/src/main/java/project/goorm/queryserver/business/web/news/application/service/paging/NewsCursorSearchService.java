@@ -27,11 +27,9 @@ public class NewsCursorSearchService {
                 0 :
                 newsList.get(newsList.size() - 1).getNewsId();
 
-        Long nextSearchIndex = lastOfList - 1;
-
         Boolean hasNext = hasNext(lastOfList);
 
-        return new CursorResult<>(newsList, hasNext, nextSearchIndex);
+        return new CursorResult<>(newsList, hasNext, lastOfList);
     }
 
     private List<News> getNewsList(
