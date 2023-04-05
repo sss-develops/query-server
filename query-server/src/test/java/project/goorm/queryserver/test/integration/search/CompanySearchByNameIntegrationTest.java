@@ -3,6 +3,7 @@ package project.goorm.queryserver.test.integration.search;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import project.goorm.queryserver.business.core.domain.company.entity.Company;
 import project.goorm.queryserver.business.web.common.paging.Cursor;
 import project.goorm.queryserver.business.web.company.application.CompanySearchQuery;
@@ -11,6 +12,7 @@ import project.goorm.queryserver.test.helper.helper.PersistenceHelper;
 import project.goorm.queryserver.test.integration.IntegrationTestBase;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -37,10 +39,13 @@ public class CompanySearchByNameIntegrationTest extends IntegrationTestBase {
         Cursor cursor = Cursor.from(0L, 10);
         //when
         List<CompanyResponse> companyResponseList = companySearchQuery.searchCompaniesByName(cursor, companyNameTest);
+        List<String> ignoreCaseList = companyResponseList.stream().map(l -> l.getCompanyName()).collect(Collectors.toList());
         //then
-        assertThat(companyResponseList)
-                .extracting("companyName")
-                .contains(companyNameTest);
+        assertThat(ignoreCaseList)
+                .extracting(String::toLowerCase)
+                .allMatch(s -> s.startsWith(companyNameTest));
+
+
     }
 
     @Test
@@ -77,9 +82,9 @@ public class CompanySearchByNameIntegrationTest extends IntegrationTestBase {
         List<CompanyResponse> companyResponseList = companySearchQuery.searchCompaniesByName(cursor, companyNameTest);
         //then
         for (int i = 0; i < cursorPageSize; i++) {
-            assertThat(companyResponseList.get(i))
+            assertThat(companyResponseList.get(i).getCompanyName())
                     .isEqualTo(companyList
-                            .get(cursorNext.intValue() + i));
+                            .get(cursorNext.intValue() + i).getCompanyName());
         }
     }
 }
