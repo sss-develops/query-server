@@ -14,6 +14,7 @@ import project.goorm.queryserver.business.core.domain.news.infrastructure.query.
 import project.goorm.queryserver.business.web.news.application.NewsQuery;
 import project.goorm.queryserver.business.web.news.application.service.NewsQueryService;
 import project.goorm.queryserver.business.web.news.presentation.response.NewsResponse;
+import project.goorm.queryserver.common.configuration.rdb.DatabaseTestBase;
 import project.goorm.queryserver.test.helper.helper.PersistenceHelper;
 import project.goorm.queryserver.test.integration.IntegrationTestBase;
 
@@ -25,7 +26,7 @@ import static org.mockito.Mockito.verify;
 import static project.goorm.queryserver.test.helper.fixture.news.NewsFixture.createNews;
 
 @DisplayName("레디스 캐시 테스트")
-class RedisCacheTest extends IntegrationTestBase {
+class RedisCacheTest extends DatabaseTestBase {
 
     private NewsQuery newsQuery;
 

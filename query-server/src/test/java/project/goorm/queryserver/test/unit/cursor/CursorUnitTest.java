@@ -14,6 +14,7 @@ import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.method.support.ModelAndViewContainer;
 import project.goorm.queryserver.business.web.common.paging.Cursor;
 import project.goorm.queryserver.common.configuration.argumentresolver.PagingArgumentResolver;
+import project.goorm.queryserver.common.configuration.rdb.DatabaseTestBase;
 import project.goorm.queryserver.test.integration.IntegrationTestBase;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -22,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 
 @DisplayName("커서 단위 테스트")
-public class CursorUnitTest extends IntegrationTestBase {
+public class CursorUnitTest extends DatabaseTestBase {
 
     @Autowired
     private PagingArgumentResolver argumentResolver;

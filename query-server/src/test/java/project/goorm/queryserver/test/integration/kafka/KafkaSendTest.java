@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 import org.springframework.test.context.ActiveProfiles;
+import project.goorm.queryserver.common.configuration.rdb.DatabaseTestBase;
 import project.goorm.queryserver.common.response.ApiResponse;
 import project.goorm.queryserver.common.response.log.ESLog;
 
@@ -18,7 +19,7 @@ import java.util.UUID;
 @DisplayName("카프카 Send 테스트")
 @ActiveProfiles("test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class KafkaSendTest extends KafkaBaseTest{
+public class KafkaSendTest extends DatabaseTestBase {
 
     @Value("${test.topic}")
     private String topic;

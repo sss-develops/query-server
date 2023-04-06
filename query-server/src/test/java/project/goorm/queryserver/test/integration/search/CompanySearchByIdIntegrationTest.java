@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import project.goorm.queryserver.business.core.domain.company.entity.Company;
 import project.goorm.queryserver.business.web.company.application.CompanySearchQuery;
 import project.goorm.queryserver.business.web.company.presentation.response.CompanyResponse;
+import project.goorm.queryserver.common.configuration.rdb.DatabaseTestBase;
 import project.goorm.queryserver.common.exception.common.SSSTeamException;
 import project.goorm.queryserver.test.helper.fixture.company.CompanyFixture;
 import project.goorm.queryserver.test.helper.helper.PersistenceHelper;
@@ -16,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static project.goorm.queryserver.business.core.domain.company.CompanyTypeException.COMPANY_NOT_FOUND_EXCEPTION;
 
 @DisplayName("회사 상세조회 통합 테스트")
-public class CompanySearchByIdIntegrationTest extends IntegrationTestBase {
+public class CompanySearchByIdIntegrationTest extends DatabaseTestBase {
 
     @Autowired
     private CompanySearchQuery companySearchQuery;
