@@ -33,6 +33,7 @@ public abstract class DatabaseTestBase {
         @Override
         public void initialize(ConfigurableApplicationContext applicationContext) {
             database.start();
+            kafka.start();
             TestPropertySourceUtils.addInlinedPropertiesToEnvironment(
                     applicationContext,
                     "spring.test.database.replace=none",
@@ -41,10 +42,10 @@ public abstract class DatabaseTestBase {
                     "spring.datasource.master.password=" + database.getPassword(),
                     "spring.datasource.replication.jdbc-url=" + database.getJdbcUrl(),
                     "spring.datasource.replication.username=" + database.getUsername(),
-                    "spring.datasource.replication.password=" + database.getPassword()
+                    "spring.datasource.replication.password=" + database.getPassword(),
+                    "spring.kafka.bootstrap-servers", kafka.getBootstrapServers()
             );
 
-            kafka.start();
         }
     }
 
