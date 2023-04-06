@@ -3,11 +3,12 @@ package project.goorm.queryserver.test.integration.news.paging;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import project.goorm.queryserver.business.core.domain.news.entity.News;
 import project.goorm.queryserver.business.web.common.paging.Cursor;
 import project.goorm.queryserver.business.web.common.paging.CursorResult;
 import project.goorm.queryserver.business.web.news.application.service.paging.NewsCursorSearchService;
-import project.goorm.queryserver.common.configuration.rdb.AbstractContainerTestBase;
+import project.goorm.queryserver.common.configuration.rdb.DatabaseTestBase;
 import project.goorm.queryserver.test.helper.fixture.news.NewsFixture;
 import project.goorm.queryserver.test.helper.helper.PersistenceHelper;
 
@@ -17,7 +18,8 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 @DisplayName("News커서 기반 조회 테스트")
-public class NewsCursorPagingServiceTest extends AbstractContainerTestBase {
+@ActiveProfiles("test")
+public class NewsCursorPagingServiceTest extends DatabaseTestBase {
 
     @Autowired
     private PersistenceHelper persistenceHelper;

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import project.goorm.queryserver.business.core.domain.news.entity.News;
 import project.goorm.queryserver.business.web.news.application.NewsQuery;
 import project.goorm.queryserver.business.web.news.presentation.response.NewsResponse;
+import project.goorm.queryserver.common.configuration.rdb.DatabaseTestBase;
 import project.goorm.queryserver.common.exception.common.SSSTeamException;
 import project.goorm.queryserver.test.helper.helper.PersistenceHelper;
 import project.goorm.queryserver.test.integration.IntegrationTestBase;
@@ -17,7 +18,7 @@ import static project.goorm.queryserver.business.core.domain.news.NewsTypeExcept
 import static project.goorm.queryserver.test.helper.fixture.news.NewsFixture.createNews;
 
 @DisplayName("뉴스 상세조회 통합 테스트")
-class NewsSearchByIdIntegrationTest extends IntegrationTestBase {
+class NewsSearchByIdIntegrationTest extends DatabaseTestBase {
 
     @Autowired
     private NewsQuery newsQuery;

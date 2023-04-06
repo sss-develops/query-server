@@ -5,12 +5,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import project.goorm.queryserver.business.web.client.redis.RedisCountCommand;
+import project.goorm.queryserver.common.configuration.rdb.DatabaseTestBase;
 import project.goorm.queryserver.test.integration.IntegrationTestBase;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("레디스 조회 수 증가 테스트")
-class RedisViewCountTest extends IntegrationTestBase {
+class RedisViewCountTest extends DatabaseTestBase {
 
 
     @Autowired
