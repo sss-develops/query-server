@@ -19,6 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static project.goorm.queryserver.test.helper.fixture.company.CompanyListFixture.createCompanyList;
 
+@DisplayName("검색어로 시작하는 회사 이름 조회 통합 테스트")
 public class CompanySearchByNameIntegrationTest extends DatabaseTestBase {
 
     @Autowired
