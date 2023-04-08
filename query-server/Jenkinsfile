@@ -1,5 +1,7 @@
 pipeline {
-  agent any
+  agent {
+    label 'agent'
+  }
   
   parameters {
     string name: 'IMAGE_NAME', defaultValue: 'query-server'
