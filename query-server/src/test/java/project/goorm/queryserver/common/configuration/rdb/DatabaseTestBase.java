@@ -29,7 +29,6 @@ public abstract class DatabaseTestBase {
 
         @Container
         static final KafkaContainer kafka = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:latest"));
-
         @Override
         public void initialize(ConfigurableApplicationContext applicationContext) {
             database.start();
@@ -43,7 +42,7 @@ public abstract class DatabaseTestBase {
                     "spring.datasource.replication.jdbc-url=" + database.getJdbcUrl(),
                     "spring.datasource.replication.username=" + database.getUsername(),
                     "spring.datasource.replication.password=" + database.getPassword(),
-                    "spring.kafka.bootstrap-servers", kafka.getBootstrapServers()
+                    "spring.kafka.bootstrap-servers=",kafka.getBootstrapServers()
             );
 
         }
