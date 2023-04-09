@@ -9,7 +9,7 @@ pipeline {
   }
 
   stages {
-    stage('Move directory and Copy test config file') {
+    stage('Move directory') {
       when {
         expression { 
             params.IMAGE_NAME == 'query-server' ||
@@ -18,8 +18,6 @@ pipeline {
       }
       steps {
         sh "cp -rf query-server/* ."
-        sh "mkdir -p ${env.WORKSPACE}/src/test/resources/"
-        sh "cp /home/ubuntu/test-config/${params.IMAGE_NAME}/application-test.yml ${env.WORKSPACE}/src/test/resources/"
       }
     }
 
