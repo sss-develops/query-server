@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.data.redis.connection.RedisClusterConfiguration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
@@ -29,16 +30,13 @@ public class RedisConfiguration {
     @Value("${spring.redis.port}")
     private int port;
 
-    @Primary
     @Bean(name = "redisCacheConnectionFactory")
     public RedisConnectionFactory redisCacheConnectionFactory() {
-        RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
-        redisStandaloneConfiguration.setHostName(host);
-        redisStandaloneConfiguration.setPort(port);
+        RedisClusterConfiguration redisStandaloneConfiguration = new RedisClusterConfiguration();
+        redisStandaloneConfiguration.clusterNode(host, port);
         return new LettuceConnectionFactory(redisStandaloneConfiguration);
     }
 
-    @Primary
     @Bean
     public RedisCacheManager cacheManager(@Qualifier("redisCacheConnectionFactory") RedisConnectionFactory connectionFactory) {
         RedisCacheConfiguration defaultConfig = RedisCacheConfiguration.defaultCacheConfig()
